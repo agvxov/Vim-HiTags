@@ -44,7 +44,7 @@ def opts(args):
 		usage(args[0], 1)
 
 def hi(group):
-	return 'syn match\t\t{group} \"\<{{kw}}\>\"'.format(group=group)
+	return 'syn keyword\t\tHiTag{group} {{kw}}'.format(group=group)
 
 targets = [
 	{
