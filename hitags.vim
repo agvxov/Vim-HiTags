@@ -9,7 +9,7 @@
 "  ~/.vim/plugin/HiTags/ is guaranteed to exist after installation,
 "  thats why it's the default
 "  otherwise you are responsible for creating your own
-let s:polution_directory = '~/.vim/plugin/HiTags/' 
+let s:polution_directory = expand('~/.vim/plugin/HiTags/')
 
 " Compiler to use for preprocessing C/C++, so headers are respected
 "  Either use "clang" or "gcc" or something compatible,
@@ -27,12 +27,12 @@ let s:tags_file          = expand(s:polution_directory) . s:tags_filename
 let s:tags_scriptname    = 'tags.vim'
 let s:tags_script        = expand(s:polution_directory) . 'tags.vim'
 "
-let s:generator_script   =  '~/.vim/plugin/HiTags/hitags.py'
+let s:generator_script   = expand('~/.vim/plugin/HiTags/hitags.py')
 let s:generation_command = 'python ' . s:generator_script .
-                         \ ' -i ' . expand('%:p') .
-                         \ ' -p ' . s:preprocessor .
-                         \ ' -t ' . s:polution_directory .
-                         \ '  > ' . s:polution_directory . s:tags_script
+                         \ ' -i ' . '"' . expand('%:p')        . '"' .
+                         \ ' -p ' . '"' . s:preprocessor       . '"' .
+                         \ ' -t ' . '"' . s:polution_directory . '"' .
+                         \ '  > ' . '"' . s:tags_script        . '"'
 
 function! HiTagsUpdate()
 	let pid = system(s:generation_command)

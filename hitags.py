@@ -8,7 +8,7 @@ from subprocess import run, PIPE
 input_filename = ''
 preprocessor='clang -fdirectives-only -E {input_} -o {output}'
 tags_filename = 'vim.tags'
-polution_directory = '.'
+polution_directory = './'
 
 def print2(s):
 	print(s, file=sys.stderr)
@@ -22,7 +22,7 @@ def usage(name, x):
 	exit(x)
 
 def opts(args):
-	global input_filename, preprocessor
+	global input_filename, preprocessor, polution_directory
 
 	try:
 		i = args.index("--help") if "--help" in args else -1
@@ -100,22 +100,22 @@ def mimetype(filename):
 	return r
 
 def preprocessfile(filename):
-	global preprocessor
+	global preprocessor, polution_directory
 	output = polution_directory + "/" + "tags.i"
 	run(preprocessor.format(input_=filename, output=output), shell=True)
-	return out
+	return output
 
 def file2tags(filename, flags):
 	global tags_filename, polution_directory
 	ctags_command = "ctags --recurse --extras=+F --kinds-C=+px {extras} -o {output} {input_}"
 	output = polution_directory + "/" + tags_filename
 	cmd = ctags_command.format(extras=flags, output=output, input_=filename)
-	print2(cmd)
 	run(cmd, shell=True)
-	return tags_filename
+	return output
 
 def tags2hi(filename):
 	output = set()
+	print2(filename)
 	try:
 		with open(filename) as f:
 			csv_reader = csv.reader(f, delimiter='\t')
@@ -129,7 +129,7 @@ def tags2hi(filename):
 					except:
 						print2(row)
 	except FileNotFoundError as e:
-		print2("No such file or directory.")
+		print2(sys.argv[0] + ": No such file or directory '{0}'.".format(filename))
 		exit(1)
 	return output
 
