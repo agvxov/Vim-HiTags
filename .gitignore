@@ -1,0 +1,6 @@
+hitags.tar
+**/*tags
+**/*.i
+object/*
+*.out
+build/gcc-*
