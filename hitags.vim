@@ -45,12 +45,21 @@ function! HiTagsUpdate()
 	endif
 endfunction
 
+function! HiTagsClean()
+	syn clear HiTagSpecial
+	syn clear HiTagFunction
+	syn clear HiTagType
+	syn clear HiTagConstant
+	syn clear HiTagIdentifier
+endfunction
+
 function! HiTagsHighlight()
 	execute 'source ' . s:tags_script
 endfunction
 
 function! HiTagsDo()
 	call HiTagsUpdate()
+	call HiTagsClean()
 	call HiTagsHighlight()
 endfunction
 
@@ -60,6 +69,14 @@ if exists('g:hitags_events')
 		execute "autocmd " . e . " * HiTagsDo"
 	endfor
 endif
+
+hi link HiTagSpecial    Special
+hi link HiTagFunction   Function
+hi link HiTagType       Type
+hi link HiTagConstant   Constant
+hi link HiTagIdentifier Identifier
+
 command! HiTagsUpdate    :call HiTagsUpdate()
+command! HiTagsClean     :call HiTagsClean()
 command! HiTagsHighlight :call HiTagsHighlight()
 command! HiTagsDo        :call HiTagsDo()
