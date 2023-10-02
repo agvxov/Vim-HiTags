@@ -1,6 +1,6 @@
 # HiTags
 Hitags is a Vim plugin which harnesses the power of ctags
-to provide dynamic symbol (e.g. varriable, function) name highlightings.
+to provide dynamic symbol (e.g. variable, function) name highlighting.
 
 # Before/After
 ![before\_after](before_after.jpg)
@@ -18,7 +18,7 @@ to provide dynamic symbol (e.g. varriable, function) name highlightings.
 ```Bash
  $ make; make install
 ```
-Note: if you dont have (GNU) Make installed for some reason,
+Note: if you don't have (GNU) Make installed for some reason,
 opening `Makefile` with vim and copy pasting the commands (whats indented)
 to your shell should also suffice
 
@@ -29,6 +29,6 @@ let g:hitags_events = ["BufWrite"]  " trigger a symbol update on writes
 ```
 
 4. **_(Optional)_** Further configure HiTags by editing ~/.vim/plugin/hitags.vim.
-All reguired details are commented right there in the script.
+All required details are commented right there in the script.
 
 5. Enjoy
