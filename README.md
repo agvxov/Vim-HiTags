@@ -3,7 +3,7 @@ Hitags is a Vim plugin which harnesses the power of ctags
 to provide dynamic symbol (e.g. varriable, function) name highlightings.
 
 # Before/After
-/* NOTE: TODO */
+![before\_after](before_after.jpg)
 
 # Dependencies
  + [mimetype](https://packages.gentoo.org/packages/dev-perl/File-MimeInfo) (sadly, `file -i` does not suffice)
