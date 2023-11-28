@@ -35,8 +35,8 @@ bundle: clean
 	cp hitags.py object/.vim/plugin/HiTags/
 	tar -C object/ -c .vim/ -f hitags.tar
 
-install:
-	tar -x -f hitags.tar -C ~/
+install: bundle
+	tar -x -f hitags.tar --dereference -C ~/
 
 clean:
 	-rm -frfr object/* object/.vim/
