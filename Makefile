@@ -39,4 +39,6 @@ install: bundle
 	tar -x -f hitags.tar --dereference -C ~/
 
 clean:
-	-rm -frfr object/* object/.vim/
+	-rm -frfr object/*
+	-rm -frfr object/.vim/
+	-rm -frfr hitags.tar
