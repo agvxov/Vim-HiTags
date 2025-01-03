@@ -23,3 +23,4 @@ Working without symbol highlighting is really annoying.
 * the signatures are terribly buggy, but somewhat helpful
 * C++ is fucked
 * pre-generation is still not a bad idea
+* im glad that frexx exists, but its source quality is concerning
