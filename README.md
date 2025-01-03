@@ -25,7 +25,7 @@ opening `Makefile` with vim and copy pasting the commands (whats indented)
 to your shell should also suffice
 
 3. Configure Vim to actually invoke the plugin.
-    Achive this by appending / overriding the following definition in your .vimrc.
+    Achieve this by appending / overriding the following definition in your .vimrc.
 ```VimScript
 let g:hitags_events = ["BufWrite"]  " trigger a symbol update on writes
 ```
