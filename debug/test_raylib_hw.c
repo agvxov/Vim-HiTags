@@ -1,4 +1,8 @@
-#include "raylib.h"
+#include <raylib.h>
+
+typedef struct {
+    int i;
+} my_struct;
 
 signed main(void) {
     InitWindow(800, 450, "Hello World");
