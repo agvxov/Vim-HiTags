@@ -26,19 +26,3 @@
 #	eobject ${TARGET.featch} fetch
 #	cd object/;           \
 #	tar -x -f ${TARGET.untar}
-
-bundle: clean
-	-mkdir object/.vim/
-	-mkdir object/.vim/plugin/
-	cp hitags.vim object/.vim/plugin/
-	-mkdir object/.vim/plugin/HiTags/
-	cp hitags.py object/.vim/plugin/HiTags/
-	tar -C object/ -c .vim/ -f hitags.tar
-
-install: bundle
-	tar -x -f hitags.tar --dereference -C ~/
-
-clean:
-	-rm -frfr object/*
-	-rm -frfr object/.vim/
-	-rm -frfr hitags.tar

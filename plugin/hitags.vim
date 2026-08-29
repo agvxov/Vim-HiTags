@@ -6,10 +6,7 @@
 "   + tags files
 "   + highlighting scripts
 "  I do not recommend using '.' especially if you don't auto cd with vim
-"  ~/.vim/plugin/HiTags/ is guaranteed to exist after installation,
-"  thats why it's the default
-"  otherwise you are responsible for creating your own
-let s:polution_directory = expand('~/.vim/plugin/HiTags/')
+let s:polution_directory = expand('<sfile>:p:h:h') . '/cache/'
 
 " Compiler_Collection_based_Preprocessing:
 if 0
@@ -39,7 +36,7 @@ let s:tags_scriptname    = 'tags.vim'
 let s:tags_script        = expand(s:polution_directory) . 'tags.vim'
 let s:sigs_script        = expand(s:polution_directory) . 'sigs.vim'
 "
-let s:generator_script   = expand('~/.vim/plugin/HiTags/hitags.py')
+let s:generator_script   = expand('<sfile>:p:h:h') . '/bin/hitags.py'
 let s:generation_command =
                          \ 'python ' . s:generator_script .
                          \ ' -i ' . '"' . expand('%:p')        . '"' .
