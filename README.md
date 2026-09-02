@@ -2,18 +2,16 @@
 > Hitags is a Vim plugin which harnesses the power of ctags
 > to provide dynamic symbol (e.g. variable, function) name highlighting.
 
-Now, comes with experimental tool tips in insert mode.
-
-# Before/After
+## Before/After
 ![before\_after](before_after.jpg)
 
-# Runtime dependencies
+## Runtime dependencies
  + [mimetype](https://packages.gentoo.org/packages/dev-perl/File-MimeInfo) (sadly, `file -i` does not suffice)
  + python3 (system installation, not Vim compile flag)
  + ctags (tested with Universal ctags)
  + **_(Optional)_** gcc/clang/fcpp (to preprocess C/C++ files)
 
-# Installation
+## Installation
 1. Clone the source
 
 2. Run:
@@ -34,3 +32,7 @@ let g:hitags_events = ["BufWrite"]  " trigger a symbol update on writes
 All required details are commented right there in the script.
 
 5. Enjoy
+
+## Notes
+
+Now, comes with experimental tool tips in insert mode.
