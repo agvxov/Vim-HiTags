@@ -12,26 +12,21 @@
  + **_(Optional)_** gcc/clang/fcpp (to preprocess C/C++ files)
 
 ## Installation
-1. Clone the source
+1. Pack this repository.
 
-2. Run:
-```Bash
- $ make; make install
-```
-Note: if you don't have (GNU) Make installed for some reason,
-opening `Makefile` with vim and copy pasting the commands (whats indented)
-to your shell should also suffice
+> [!NOTE]
+> "Pack" as in the Vim 8 feature.
 
-3. Configure Vim to actually invoke the plugin.
+2. Configure Vim to actually invoke the plugin.
     Achieve this by appending / overriding the following definition in your .vimrc.
 ```VimScript
 let g:hitags_events = ["BufWrite"]  " trigger a symbol update on writes
 ```
 
-4. **_(Optional)_** Further configure HiTags by editing ~/.vim/plugin/hitags.vim.
+3. **_(Optional)_** Further configure HiTags by editing `plugin/hitags.vim`.
 All required details are commented right there in the script.
 
-5. Enjoy
+4. Enjoy
 
 ## Notes
 
