@@ -2,6 +2,8 @@
 use strict;
 use warnings;
 use feature 'signatures';
+use File::Slurp qw(slurp write_file);
+use File::Basename;
 
 sub usage {
     print "tags-from-header.pl <file>+   : generate tags file for each file\n";
@@ -19,6 +21,10 @@ sub header_name2tags_name($file) {
 
 sub header_name2processed_name($file) {
     return strip_ext($file) . ".i";
+}
+
+sub header_name2stub_name($file) {
+    return strip_ext($file) . ".stub.d";
 }
 
 sub preprocess($file) {
@@ -42,10 +48,34 @@ sub tag($orig_file, $processed_file) {
     return $out;
 }
 
+sub stub($file) {
+    my @headers;
+    my @lines = slurp($file);
+    for my $line (@lines) {
+        if ($line =~ /^#include\s+<(.*)>$/) {
+            push @headers, $1;
+        }
+        elsif ($line =~ /^\s*\/\/.*$/) {
+            # comment
+        } else {
+            chomp $line;
+            print "WARNING: unrecognized line found in input: '$line'\n";
+        }
+    }
+
+    my $dir = header_name2stub_name($file);
+    for my $header (@headers) {
+        my $header_path = "$dir/$header";
+        mkdir(dirname($header_path));
+        write_file($header_path, "");
+    }
+}
+
 sub tags_from_header($file) {
     print "Starting to process $file...";
     my $processed_header = preprocess($file);
     tag($file, $processed_header);
+    stub($file);
     unlink($processed_header);
     print "Done.\n";
 }

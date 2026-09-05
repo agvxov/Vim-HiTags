@@ -3,3 +3,4 @@
 object/*
 *.out
 build/gcc-*
+*.stub.d
