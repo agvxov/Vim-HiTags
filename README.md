@@ -28,6 +28,31 @@ All required details are commented right there in the script.
 
 4. Enjoy
 
-## Notes
+## How it works
+```pseudo
+when do-update()
+    if is-c-source-file()
+        preprocess()
 
-Now, comes with experimental tool tips in insert mode.
+    run-ctags()
+    generate-vim-syntax-file-with-python()
+    source-vim-syntax-file()
+```
+
+## Project structure
+
+| File | Description |
+| :--- | :---------- |
+| hitags.vim | Plugin invoking hitags.py and sourcing the generated syntax file |
+| hitags.py  | Vim syntax file generator |
+| debug/     | Developer relevant resources |
+| builder/   | Optional pregenerated tags files for standard libraries |
+
+## Rationale
+Working without symbol highlighting is really annoying.
+
+## Notes
+* Now, comes with experimental tool tips in insert mode.
+* The signatures are terribly buggy, but somewhat helpful
+* C++ is fucked
+* im glad that frexx exists, but its source quality is concerning and it crashes from `__VA_ARGS__`
