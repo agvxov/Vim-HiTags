@@ -8,22 +8,38 @@
 "  I do not recommend using '.' especially if you don't auto cd with vim
 let s:polution_directory = expand('<sfile>:p:h:h') . '/cache/'
 
-" Compiler_Collection_based_Preprocessing:
-if 0
-   "  Compiler to use for preprocessing C/C++, so headers are respected
-   "   Either use "clang" or "gcc" or something compatible,
-   "   alternatively you will have to edit s:preprocessor
-   let s:preprocessor_executable = "clang"
-   "let s:preprocessor_executable = "gcc"
-   let s:preprocessor            = s:preprocessor_executable . ' -fdirectives-only -E {input_} -o {output}'
+" C_preprocessor:
+"  The main purpose of our usage of a preprocessor is
+"   to get #include statements expanded.
+"
+"  Real compilers tend to be problematic.
+"  Namely, they error out if a header is not found.
+"
+"  The only stand-alone preprocessor implementation i know
+"   is fcpp (https://github.com/bagder/fcpp.git)
+"  It has the major advantage of only warning on missing
+"   headers and not terminating with an error.
+"  Meaning a tool chain using '-I' doesn't break everything.
+"  The problem is, that __VA_ARGS__ crashes it.
+let g:hitags_cpreprocessor = get(g:, 'hitags_cpreprocessor', 'gcc')
+
+let s:preprocessor_commands = {
+      \ 'clang': 'clang -fdirectives-only -E {input_} -o {output}',
+      \ 'gcc':   'gcc   -fdirectives-only -E {input_} -o {output}',
+      \ 'fcpp':  'fcpp -I/usr/local/include -LL {input_} {output}',
+      \ }
+
+if !has_key(s:preprocessor_commands, g:hitags_cpreprocessor)
+  echoerr 'hitags: invalid g:hitags_cpreprocessor value "' . g:hitags_cpreprocessor .
+        \ '" - expected one of: ' . join(keys(s:preprocessor_commands), ', ')
 endif
 
-" Stand_alone_preprocessor:
-"  The only implementation i know is fcpp (https://github.com/bagder/fcpp.git)
-"  However, it has the major advantage that it will only warn on missing
-"  headers and not error. Meaning a tool chain using '-I' doesn't break
-"  everything.
-let s:preprocessor = "fcpp -I/usr/local/include -LL {input_} {output}"
+let s:preprocessor = get(s:preprocessor_commands, g:hitags_cpreprocessor,
+      \ s:preprocessor_commands['gcc'])
+
+if exists('g:hitags_cpreprocessor_cmd')
+  let s:preprocessor = g:hitags_cpreprocessor_cmd
+endif
 
 " --- --------------------------- ---
 " ---          Don't Touch        ---

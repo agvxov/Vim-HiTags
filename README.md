@@ -17,16 +17,30 @@
 > [!NOTE]
 > "Pack" as in the Vim 8 feature.
 
-2. Configure Vim to actually invoke the plugin.
-    Achieve this by appending / overriding the following definition in your .vimrc.
-```VimScript
-let g:hitags_events = ["BufWrite"]  " trigger a symbol update on writes
-```
+2. Configure (see below).
 
 3. **_(Optional)_** Further configure HiTags by editing `plugin/hitags.vim`.
 All required details are commented right there in the script.
 
 4. Enjoy
+
+## Configuration
+You **MUST** define the events when the highlighting will get regenerated.
+```VimScript
+let g:hitags_events = ["BufWrite"]  " trigger a symbol update on writes
+```
+
+You may want to customize your C preprocessor.
+```VimScript
+" You may Choose a preset.
+" Each requires their respectable system executable.
+let g:hitags_cpreprocessor = clang
+let g:hitags_cpreprocessor = gcc
+let g:hitags_cpreprocessor = fcpp
+
+" You can also bypass the presets.
+let g:hitags_cpreprocessor_cmd = "whatever {input_} {output}"
+```
 
 ## How it works
 ```pseudo
