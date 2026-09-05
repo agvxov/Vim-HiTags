@@ -3,6 +3,7 @@
 import sys
 import re
 import csv
+import os
 from subprocess import run, PIPE
 
 input_filename = ''
@@ -196,7 +197,9 @@ def prepare(file):
 def preprocessfile(filename):
 	global preprocessor, polution_directory
 	output = polution_directory + "/" + "tags.i"
-	run(preprocessor.format(input_=filename, output=output), shell=True)
+	env = os.environ.copy()
+	env["PATH"] = os.path.dirname(os.path.abspath(__file__)) + os.pathsep + env["PATH"]
+	run(preprocessor.format(input_=filename, output=output), shell=True, env=env)
 	return output
 #pragma endregion
 

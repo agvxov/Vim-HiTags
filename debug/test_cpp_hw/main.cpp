@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "helper.h"
 
 typedef int myint;

@@ -20,7 +20,9 @@ let s:polution_directory = expand('<sfile>:p:h:h') . '/cache/'
 "  It has the major advantage of only warning on missing
 "   headers and not terminating with an error.
 "  Meaning a tool chain using '-I' doesn't break everything.
-"  The problem is, that __VA_ARGS__ crashes it.
+"  The problem is, that many things, such as __VA_ARGS__ crashes it.
+"  The following does crash:
+"      \ 'fcpp':  'fcpp -I/usr/local/include $(git-compiler-include-path.pl) -LL {input_} {output}',
 let g:hitags_cpreprocessor = get(g:, 'hitags_cpreprocessor', 'gcc')
 
 let s:preprocessor_commands = {
@@ -56,14 +58,14 @@ let s:generator_script   = expand('<sfile>:p:h:h') . '/bin/hitags.py'
 let s:generation_command =
                          \ 'python ' . s:generator_script .
                          \ ' -i ' . '"' . expand('%:p')        . '"' .
-                         \ ' -p ' . '"' . s:preprocessor       . '"' .
+                         \ ' -p ' . "'" . s:preprocessor       . "'" .
                          \ ' -t ' . '"' . s:polution_directory . '"' .
                          \ ' hi ' .
                          \ '  > ' . '"' . s:tags_script        . '"' .
                          \ ';' .
                          \ 'python ' . s:generator_script .
                          \ ' -i ' . '"' . expand('%:p')        . '"' .
-                         \ ' -p ' . '"' . s:preprocessor       . '"' .
+                         \ ' -p ' . "'" . s:preprocessor       . "'" .
                          \ ' -t ' . '"' . s:polution_directory . '"' .
                          \ ' sig ' .
                          \ '  > ' . '"' . s:sigs_script        . '"'
